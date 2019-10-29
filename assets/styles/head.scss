@@ -1,0 +1,30 @@
+#head{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: $BS * 670;
+    height: $BS * 670;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    transition: left 0.5s ease-out, transform 0.5s ease-out;
+    &:focus{
+        outline: none;
+    }
+}
+
+.who + #head{
+    left: 100%;
+    transform: translateX(0) translateY(-50%);
+}
+
+.what + #head{
+    left: -100%;
+    transform: translateX(0) translateY(-50%);
+}
+
+@media #{$BreakpointS}{
+    #head{
+        width: 100vw;
+        height: 100vw;
+    }
+}

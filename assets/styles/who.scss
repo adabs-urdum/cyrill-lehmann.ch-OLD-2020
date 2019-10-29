@@ -1,0 +1,86 @@
+.who{
+
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    color: $Black;
+
+    &__list{
+        position: absolute;
+        width: $BS * 880;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -90%) rotate(-12.5deg);
+        @include bs-font-size(27);
+        line-height: 150%;
+        animation: FADE-IN-WHO 0.6s ease-out forwards;
+        animation-delay: 0.3s;
+        opacity: 0;
+        @keyframes FADE-IN-WHO{
+            0%{
+                color: $MustardDark;
+                text-shadow: 0 0 $Mustard;
+                opacity: 0;
+            }
+            1%{
+                opacity: 1;
+            }
+            100%{
+                text-shadow: 0 $BS*2 $Mustard;
+                opacity: 1;
+            }
+        }
+    }
+
+    &__listEntry{
+        margin-bottom: $BS * 16;
+    }
+
+    &__anchorBack{
+        position: absolute;
+        top: 45%;
+        right: $BS * 28;
+    }
+
+}
+
+
+@media #{$BreakpointS}{
+    .who{
+
+        &__anchorBack{
+            top: auto;
+            right: $BS * 56;
+            bottom: $BS * 56;
+        }
+
+        &__list{
+            top: 10%;
+            width: $BS * 1024;
+            @include bs-font-size(65);
+            transform: translate(-50%, 0) rotate(-12.5deg);
+            animation: FADE-IN-WHO-MOBILE 0.6s ease-out forwards;
+            animation-delay: 0.3s;
+            @keyframes FADE-IN-WHO-MOBILE{
+                0%{
+                    color: $MustardDark;
+                    text-shadow: 0 0 $Mustard;
+                    opacity: 0;
+                }
+                1%{
+                    opacity: 1;
+                }
+                100%{
+                    text-shadow: 0 $BS*8 $Mustard;
+                    opacity: 1;
+                }
+            }
+        }
+
+        &__listEntry{
+            margin-bottom: $BS * 56;
+        }
+
+    }
+}
