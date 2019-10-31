@@ -11,8 +11,10 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentRoot: '/',
+      currentRoot: '',
+      psychoMode: false,
       body: document.getElementById('body'),
+      html: document.getElementById('html'),
     };
   }
 
@@ -22,6 +24,15 @@ class App extends Component {
       currentRoot: rootName
     }, () => {
       this.state.body.classList = this.state.currentRoot
+    });
+  }
+
+  setPsychoMode = () => {
+    this.setState({
+      psychoMode: !this.state.psychoMode
+    }, () => {
+      const className = this.state.psychoMode ? 'psycho' : '';
+      this.state.html.classList = className;
     });
   }
 
@@ -48,7 +59,10 @@ class App extends Component {
             )} />
           </Switch>
         </BrowserRouter>
-        <Head />
+        <Head
+          psychoMode={ this.state.psychoMode }
+          setPsychoMode={ this.setPsychoMode }
+        />
       </Fragment>
     );
 

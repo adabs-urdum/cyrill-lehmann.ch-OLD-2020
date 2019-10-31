@@ -13,6 +13,7 @@
         height: 1px;
         transform: rotate(-30deg);
         text-transform: uppercase;
+        transition: transform 0.3s linear;
     }
 
     &__name{
@@ -22,6 +23,7 @@
         transform: translateX($BS * -320) translateY(0);
         @include bs-font-size(56);
         color: $Mustard;
+        transition: color 0.3s ease-out;
         opacity: 0;
         animation: forwards SLIDE-IN-NAME 0.5s ease-out;
         animation-delay: 0.3s;
@@ -47,6 +49,7 @@
         @include bs-font-size(28);
         color: $MustardDark;
         opacity: 0;
+        transition: color 0.3s ease-out;
         animation: forwards SLIDE-IN-POS 0.5s ease-out;
         animation-delay: 0.3s;
         @keyframes SLIDE-IN-POS{
@@ -116,6 +119,24 @@
         top: 45%;
     }
 
+}
+
+html.psycho{
+    .home{
+        &__text{
+            transform: rotate(30deg) translateY($BS * 2.5);
+        }
+        &__name{
+            color: $Psycho;
+        }
+        &__position{
+            color: $PsychoDark;
+        }
+        &__contactList{
+            right: auto;
+            left: $BS * 28;
+        }
+    }
 }
 
 @media #{$BreakpointS}{
@@ -222,5 +243,54 @@
             }
         }
 
+    }
+    html.psycho{
+        .home{
+        
+            &__text{
+                flex-direction: column-reverse;
+                top: $BS * 170;
+                left: auto;
+                right: 71%;
+                transform: rotate(0);
+            }
+
+            &__name{
+                animation: forwards SLIDE-IN-NAME-MOBILE-PSYCHO 0.5s ease-out;
+                animation-delay: 0.3s;
+                @keyframes SLIDE-IN-NAME-MOBILE-PSYCHO{
+                    0%{
+                        opacity: 0;
+                        transform: translateX(-10%) translateY(100%) rotate(30deg);
+                    }
+                    1%{
+                        opacity: 1;
+                    }
+                    100%{
+                        transform: translateX(-15%) translateY(180%) rotate(30deg);
+                        opacity: 1;
+                    }
+                }
+            }
+
+            &__position{
+                animation: forwards SLIDE-IN-POS-MOBILE-PSYCHO 0.5s ease-out;
+                animation-delay: 0.3s;
+                @keyframes SLIDE-IN-POS-MOBILE-PSYCHO{
+                    0%{
+                        transform: translateX(-20%) translateY(200%) rotate(30deg);
+                        opacity: 0;
+                    }
+                    1%{
+                        opacity: 1;
+                    }
+                    100%{
+                        transform: translateX(-10%) translateY(70%) rotate(30deg);
+                        opacity: 1;
+                    }
+                }
+            }
+
+        }
     }
 }

@@ -11,13 +11,12 @@ class Head extends Component{
         this.state = {
             engine: null,
             scene: null,
+            camera: null,
             gyroscopeActive: false,
             orientationPermission: false,
+            stare: false,
             hasGyroscope: (typeof DeviceOrientationEvent !== 'undefined' && DeviceOrientationEvent.requestPermission) || navigator.userAgent.match('CriOS') || navigator.userAgent.match('iPhone'),
         }
-    }
-
-    componentDidUpdate(){
     }
 
     componentDidMount(){
@@ -89,6 +88,20 @@ class Head extends Component{
                 this.getDevicePosition(e.acceleration.x * 2, e.acceleration.y * 2);
             }, true);
         }
+
+        window.addEventListener('resize', this.onWindowResize);
+
+    }
+
+    onWindowResize = (e) => {
+        const windowWidth = window.innerWidth;
+
+        if(windowWidth < 768){
+            this.state.camera.position.z = 700;
+        }
+        else{
+            this.state.camera.position.z = 500;
+        }
     }
 
     getDevicePosition = (x, y) => {
@@ -159,23 +172,6 @@ class Head extends Component{
         ];
         animationBox.setKeys(keys);
         head.animations.push(animationBox);
-        if(!this.webcamActive){
-            if(this.stare){
-                if(head.position.z <= 5){
-                    this.scene.beginAnimation(head, 0, animationLength, true);
-                    this.irisRight.material.diffuseColor = new BABYLON.Color3(1 / 255 * 70, 0, 0);
-                    this.irisRight.material.specularColor = new BABYLON.Color3(0.7,0.7,0.7);
-                }
-            }
-            else{
-                if(head.position.z >= starePosition - 5){
-                    this.scene.beginAnimation(head, animationLength, 0, true);
-                    this.irisRight.material.diffuseColor = new BABYLON.Color3(1 / 255 * 45, 1 / 255 * 22.5, 0);
-                    this.irisRight.material.specularColor = new BABYLON.Color3(0, 0, 0);
-                    this.head.material.diffuseColor = new BABYLON.Color4(1,1,1,0);
-                }
-            }
-        }
 
         const webcamFactor = -0.5;
         const mobileWebcamFactorX = -1;
@@ -190,8 +186,8 @@ class Head extends Component{
 
         this.webcamActive ? turnXEyeLeft = turnXEyeLeftOrigin * webcamFactor : null;
         this.webcamActive ? turnYEyeLeft = turnYEyeLeftOrigin * webcamFactor : null;
-        this.stare ? turnXEyeLeft =  turnXEyeLeftOrigin * stareFactor : null;
-        this.stare ? turnYEyeLeft =  turnYEyeLeftOrigin * stareFactor : null;
+        this.state.stare ? turnXEyeLeft =  turnXEyeLeftOrigin * stareFactor : null;
+        this.state.stare ? turnYEyeLeft =  turnYEyeLeftOrigin * stareFactor : null;
         this.webcamMobile ? turnXEyeLeft =  turnXEyeLeftOrigin * mobileWebcamFactorX : null;
         this.webcamMobile ? turnYEyeLeft =  turnYEyeLeftOrigin * mobileWebcamFactorY : null;
         eyeLeft.rotation.x = turnYEyeLeft;
@@ -205,8 +201,8 @@ class Head extends Component{
 
         this.webcamActive ? turnXEyeRight = turnXEyeRightOrigin * webcamFactor : null;
         this.webcamActive ? turnYEyeRight = turnYEyeRightOrigin * webcamFactor : null;
-        this.stare ? turnXEyeRight = turnXEyeRightOrigin * stareFactor : null;
-        this.stare ? turnYEyeRight = turnYEyeRightOrigin * stareFactor : null;
+        this.state.stare ? turnXEyeRight = turnXEyeRightOrigin * stareFactor : null;
+        this.state.stare ? turnYEyeRight = turnYEyeRightOrigin * stareFactor : null;
         this.webcamMobile ? turnXEyeRight = turnXEyeRightOrigin * mobileWebcamFactorX : null;
         this.webcamMobile ? turnYEyeRight = turnYEyeRightOrigin * mobileWebcamFactorY : null;
         eyeRight.rotation.x = turnYEyeRight;
@@ -271,7 +267,7 @@ class Head extends Component{
             head.rangeRotationY = Math.PI / 180 * 90;
 
             const pivotEyeRight = new BABYLON.TransformNode('pivotEyeRight');
-            pivotEyeRight.position = new BABYLON.Vector3(29.4,27,71.5);
+            pivotEyeRight.position = new BABYLON.Vector3(29.4,27,72.2);
             pivotEyeRight.parent = head;
 
             pivotEyeRight.maxRotationY = Math.PI / 180 * 5;
@@ -299,14 +295,14 @@ class Head extends Component{
             meshes[3].parent = pivotEyeRight;
             meshes[4].parent = pivotEyeRight;
 
-            const translateRight = new BABYLON.Vector3(-29.4,-27,-71.5);
+            const translateRight = new BABYLON.Vector3(-29.4,-27,-72.2);
             meshes[1].position = translateRight;
             meshes[2].position = translateRight;
             meshes[3].position = translateRight;
             meshes[4].position = translateRight;
 
             const pivotEyeLeft = new BABYLON.TransformNode('pivotEyeLeft');
-            pivotEyeLeft.position = new BABYLON.Vector3(-29.4,27,71.5);
+            pivotEyeLeft.position = new BABYLON.Vector3(-29.4,27,72.2);
             pivotEyeLeft.parent = head;
 
             pivotEyeLeft.maxRotationY = Math.PI / 180 * 10;
@@ -334,11 +330,28 @@ class Head extends Component{
             meshes[7].parent = pivotEyeLeft;
             meshes[8].parent = pivotEyeLeft;
 
-            const translateLeft = new BABYLON.Vector3(29.4,-27,-71.5);
+            const translateLeft = new BABYLON.Vector3(29.4,-27,-72.2);
             meshes[5].position = translateLeft;
             meshes[6].position = translateLeft;
             meshes[7].position = translateLeft;
             meshes[8].position = translateLeft;
+
+            head.actionManager = new BABYLON.ActionManager(_this.state.scene);
+            head.actionManager.registerAction(
+                new BABYLON.ExecuteCodeAction(
+                    {
+                        trigger: BABYLON.ActionManager.OnPickTrigger,
+                    },
+                    () => {
+                        _this.props.setPsychoMode();
+                        head.material.diffuseTexture = _this.props.psychoMode ? new BABYLON.Texture('../dist/obj/head3d_psycho.png', _this.state.scene) : new BABYLON.Texture('../dist/obj/head3d.png', _this.state.scene);
+                        irisRight.material.diffuseColor = _this.props.psychoMode ? new BABYLON.Color3(1/255*250,1/255*10,1/255*255) : new BABYLON.Color3(1 / 255 * 45, 1 / 255 * 22.5, 0);
+                        _this.setState({
+                            stare: !_this.state.stare,
+                        });
+                    }
+                )
+            );
 
             _this.head = head;
             _this.pivotEyeRight = pivotEyeRight;

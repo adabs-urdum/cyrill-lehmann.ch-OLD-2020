@@ -121,6 +121,38 @@
 
 }
 
+html.psycho{
+    .what{
+        &__list{
+            animation: SLIDE-IN-WHAT-LIST-PSYCHO 0.6s ease-out forwards;
+            @keyframes SLIDE-IN-WHAT-LIST-PSYCHO{
+                0%{
+                    transform: rotate(8.5deg) translateY(100%) translateX(-8%);
+                }
+                100%{
+                    transform: rotate(8.5deg) translateY(-50%) translateX(-8%);
+                }
+            }
+        }
+        &__projectName{
+            color: $Psycho;
+        }
+        &__tagListEntry{
+            color: $PsychoDark;
+        }
+        &__project{
+            &:after{
+                background: rgba(238,238,238,0.33);
+            }
+            &:hover{
+                &:after{
+                    background: rgba(238,238,238,0.85);
+                }
+            }
+        }
+    }
+}
+
 
 @media #{$BreakpointS}{
     .what{
@@ -192,5 +224,12 @@
             @include bs-font-size(56);
         }
 
+    }
+    html.psycho{
+        .what{
+            &__list{
+                top: 50%;
+            }
+        }
     }
 }

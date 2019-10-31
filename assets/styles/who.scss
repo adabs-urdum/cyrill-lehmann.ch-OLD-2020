@@ -45,6 +45,36 @@
 
 }
 
+html.psycho{
+    .who{
+
+        color: $White;
+    
+        &__list{
+            animation: FADE-IN-WHO-PSYCHO 0.6s ease-out forwards;
+            animation-delay: 0.3s;
+            opacity: 0;
+            transform: translate(-35%, -70%) rotate(12.5deg);
+            width: $BS * 1024;
+            @keyframes FADE-IN-WHO-PSYCHO{
+                0%{
+                    color: $PsychoDark;
+                    text-shadow: 0 0 $Psycho;
+                    opacity: 0;
+                }
+                1%{
+                    opacity: 1;
+                }
+                100%{
+                    text-shadow: 0 $BS*2 $Psycho;
+                    opacity: 1;
+                }
+            }
+        }
+    
+    }
+}
+
 
 @media #{$BreakpointS}{
     .who{
@@ -82,5 +112,15 @@
             margin-bottom: $BS * 56;
         }
 
+    }
+
+    html.psycho{
+        .who{
+        
+            &__list{
+                transform: translate(-35%, -5%) rotate(12.5deg);
+            }
+        
+        }
     }
 }
