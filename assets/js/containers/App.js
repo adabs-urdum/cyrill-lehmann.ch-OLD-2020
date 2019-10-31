@@ -15,6 +15,7 @@ class App extends Component {
       psychoMode: false,
       body: document.getElementById('body'),
       html: document.getElementById('html'),
+      isIeEdge: document.documentMode || (/Edge\//.test(navigator.userAgent)),
     };
   }
 
@@ -38,8 +39,11 @@ class App extends Component {
 
   render(){
 
+    const internetExplorerWarning = <h3 className="internetExplorerWarning">why don't you use a good browser. like chrome or something.</h3>
+
     return (
       <Fragment>
+        { this.state.isIeEdge ? internetExplorerWarning : null }
         <BrowserRouter>
           <Switch>
             <Route path="/who" render={() => (

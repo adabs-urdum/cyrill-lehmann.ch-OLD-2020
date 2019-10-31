@@ -132,6 +132,13 @@ img, canvas{
   }
 }
 
+.internetExplorerWarning{
+  position: fixed;
+  top: $BS*28;
+  width: 100%;
+  text-align: center;
+}
+
 .desktop_only{
   display: block;
 }
