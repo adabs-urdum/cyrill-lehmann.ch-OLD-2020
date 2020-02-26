@@ -17,6 +17,14 @@ class What extends Component {
     this.state = {
       projects: [
         {
+          name: "birdshooter",
+          description:
+            "tried to build a moorhuhn like gameplay while goofing around with PixiJS. Went along as it progressed and ended up with this.",
+          tags: ["pixiJS", "javascript"],
+          link: "https://birds.adabs.ch/",
+          imageSrc: "../dist/img/screens/birds.jpg"
+        },
+        {
           name: "memory",
           description:
             "built a minimalistic memory game without using any crucial dependencies",
