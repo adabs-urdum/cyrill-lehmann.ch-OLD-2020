@@ -1,235 +1,243 @@
-.what{
+.what {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 
+  &__projectImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    @supports (object-fit: cover) {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__list {
+    position: absolute;
+    top: 50%;
+    height: 120%;
+    overflow-y: auto;
+    padding: 0 $BS * 256;
+    transform: rotate(-8.5deg);
+    animation: SLIDE-IN-WHAT-LIST 0.6s ease-out forwards;
+    box-sizing: border-box;
+    text-align: center;
+    @keyframes SLIDE-IN-WHAT-LIST {
+      0% {
+        transform: rotate(-8.5deg) translateY(100%) translateX(8%);
+      }
+      100% {
+        transform: rotate(-8.5deg) translateY(-50%) translateX(8%);
+      }
+    }
+  }
+
+  &__listEntry {
+    display: inline-block;
     position: relative;
+    margin-bottom: $BS * 56;
+    &:first-child {
+      margin-top: $BS * 256;
+    }
+    &:last-child {
+      margin-bottom: $BS * 256;
+    }
+    &:nth-child(odd) {
+      transform: translateX(-10%);
+    }
+    &:nth-child(even) {
+      transform: translateX(10%);
+    }
+  }
+
+  &__canvas {
+    width: $BS * 720;
+  }
+
+  &__project {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: $BS * 56;
+    box-sizing: border-box;
+    transition: transform 0.3s ease-out;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(51, 51, 51, 0.33);
+      z-index: 1;
+      transition: background-color 0.2s ease-out;
+    }
+    &:hover {
+      transform: rotate(4.5deg);
+      &:after {
+        background: rgba(51, 51, 51, 0.85);
+      }
+    }
+  }
 
-    &__list{
-        position: absolute;
+  &__projectContent {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  &__projectName {
+    margin-bottom: $BS * 16;
+    color: $Mustard;
+    text-transform: uppercase;
+  }
+
+  &__projectDescription {
+    margin-bottom: $BS * 32;
+    @include bs-font-size(32);
+    line-height: 120%;
+  }
+
+  &__tagList {
+    display: flex;
+  }
+
+  &__tagListEntry {
+    color: $MustardDark;
+    margin-right: $BS * 32;
+    @include bs-font-size(22);
+  }
+
+  &__projectContent {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__anchorBack {
+    position: absolute;
+    top: 45%;
+    left: $BS * 28;
+  }
+}
+
+html.psycho {
+  .what {
+    &__list {
+      animation: SLIDE-IN-WHAT-LIST-PSYCHO 0.6s ease-out forwards;
+      @keyframes SLIDE-IN-WHAT-LIST-PSYCHO {
+        0% {
+          transform: rotate(8.5deg) translateY(100%) translateX(-8%);
+        }
+        100% {
+          transform: rotate(8.5deg) translateY(-50%) translateX(-8%);
+        }
+      }
+    }
+    &__projectName {
+      color: $Psycho;
+    }
+    &__tagListEntry {
+      color: $PsychoDark;
+    }
+    &__project {
+      &:after {
+        background: rgba(238, 238, 238, 0.33);
+      }
+      &:hover {
+        &:after {
+          background: rgba(238, 238, 238, 0.85);
+        }
+      }
+    }
+  }
+}
+
+@media #{$BreakpointS} {
+  .what {
+    &__list {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transform: rotate(0);
+      padding: 0;
+      animation: SLIDE-IN-WHAT-LIST-MOBILE 0.6s ease-out forwards;
+      top: 0;
+      @keyframes SLIDE-IN-WHAT-LIST-MOBILE {
+        0% {
+          transform: rotate(-8.5deg) translateY(100%);
+        }
+        100% {
+          transform: rotate(-8.5deg) translateY(-3%);
+        }
+      }
+    }
+
+    &__listEntry {
+      display: inline-block;
+      margin: 0 auto $BS * 128;
+      &:first-child {
+        margin-top: $BS * 1024;
+      }
+      &:last-child {
+        margin-bottom: $BS * 1024;
+      }
+      &:nth-child(odd) {
+        transform: translateX(0);
+      }
+      &:nth-child(even) {
+        transform: translateX(0);
+      }
+    }
+
+    &__canvas {
+      width: $BS * 1100;
+    }
+
+    &__anchorBack {
+      top: auto;
+      bottom: $BS * 56;
+      left: $BS * 56;
+    }
+
+    &__project {
+      color: $Mustard;
+      padding: $BS * 88;
+      &:hover {
+        transform: rotate(0);
+      }
+      &:after {
+        background: rgba(51, 51, 51, 0.85);
+      }
+    }
+
+    &__tagListEntry {
+      @include bs-font-size(40);
+    }
+
+    &__projectName {
+      @include bs-font-size(90);
+    }
+
+    &__projectDescription {
+      @include bs-font-size(56);
+    }
+  }
+  html.psycho {
+    .what {
+      &__list {
         top: 50%;
-        height: 120%;
-        overflow-y: auto;
-        padding: 0 $BS*256;
-        transform: rotate(-8.5deg);
-        animation: SLIDE-IN-WHAT-LIST 0.6s ease-out forwards;
-        box-sizing: border-box;
-        text-align: center;
-        @keyframes SLIDE-IN-WHAT-LIST{
-            0%{
-                transform: rotate(-8.5deg) translateY(100%) translateX(8%);
-            }
-            100%{
-                transform: rotate(-8.5deg) translateY(-50%) translateX(8%);
-            }
-        }
+      }
     }
-
-    &__listEntry{
-        display: inline-block;
-        position: relative;
-        margin-bottom: $BS * 56;
-        &:first-child{
-            margin-top: $BS * 256;
-        }
-        &:last-child{
-            margin-bottom: $BS * 256;
-        }
-        &:nth-child(odd){
-            transform: translateX(-10%);
-        }
-        &:nth-child(even){
-            transform: translateX(10%);
-        }
-    }
-
-    &__canvas{
-        width: $BS * 720;
-    }
-
-    &__project{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: $BS * 56;
-        box-sizing: border-box;
-        transition: transform 0.3s ease-out;
-        &:after{
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(51,51,51,0.33);
-            z-index: 1;
-            transition: background-color 0.2s ease-out;
-        }
-        &:hover{
-            transform: rotate(4.5deg);
-            &:after{
-                background: rgba(51,51,51,0.85);
-            }
-        }
-    }
-
-    &__projectContent{
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-    }
-
-    &__projectName{
-        margin-bottom: $BS * 16;
-        color: $Mustard;
-        text-transform: uppercase;
-    }
-    
-    &__projectDescription{
-        margin-bottom: $BS * 32;
-        @include bs-font-size(32);
-        line-height: 120%;
-    }
-
-    &__tagList{
-        display: flex;
-    }
-    
-    &__tagListEntry{
-        color: $MustardDark;
-        margin-right: $BS * 32;
-        @include bs-font-size(22);
-    }
-
-    &__projectContent{
-        position: relative;
-        z-index: 2;
-    }
-
-    &__anchorBack{
-        position: absolute;
-        top: 45%;
-        left: $BS * 28;
-    }
-
-}
-
-html.psycho{
-    .what{
-        &__list{
-            animation: SLIDE-IN-WHAT-LIST-PSYCHO 0.6s ease-out forwards;
-            @keyframes SLIDE-IN-WHAT-LIST-PSYCHO{
-                0%{
-                    transform: rotate(8.5deg) translateY(100%) translateX(-8%);
-                }
-                100%{
-                    transform: rotate(8.5deg) translateY(-50%) translateX(-8%);
-                }
-            }
-        }
-        &__projectName{
-            color: $Psycho;
-        }
-        &__tagListEntry{
-            color: $PsychoDark;
-        }
-        &__project{
-            &:after{
-                background: rgba(238,238,238,0.33);
-            }
-            &:hover{
-                &:after{
-                    background: rgba(238,238,238,0.85);
-                }
-            }
-        }
-    }
-}
-
-
-@media #{$BreakpointS}{
-    .what{
-        &__list{
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            transform: rotate(0);
-            padding: 0;
-            animation: SLIDE-IN-WHAT-LIST-MOBILE 0.6s ease-out forwards;
-            top: 0;
-            @keyframes SLIDE-IN-WHAT-LIST-MOBILE{
-                0%{
-                    transform: rotate(-8.5deg) translateY(100%);
-                }
-                100%{
-                    transform: rotate(-8.5deg) translateY(-3%);
-                }
-            }
-        }
-
-        &__listEntry{
-            display: inline-block;
-            margin: 0 auto $BS*128;
-            &:first-child{
-                margin-top: $BS * 1024;
-            }
-            &:last-child{
-                margin-bottom: $BS * 1024;
-            }
-            &:nth-child(odd){
-                transform: translateX(0);
-            }
-            &:nth-child(even){
-                transform: translateX(0);
-            }
-        }
-
-        &__canvas{
-            width: $BS * 1100;
-        }
-
-        &__anchorBack{
-            top: auto;
-            bottom: $BS * 56;
-            left: $BS * 56;
-        }
-
-        &__project{
-            color: $Mustard;
-            padding: $BS * 88;
-            &:hover{
-                transform: rotate(0);
-            }
-            &:after{
-                background: rgba(51,51,51,0.85);
-            }
-        }
-
-        &__tagListEntry{
-            @include bs-font-size(40);
-        }
-
-        &__projectName{
-            @include bs-font-size(90);
-        }
-
-        &__projectDescription{
-            @include bs-font-size(56);
-        }
-
-    }
-    html.psycho{
-        .what{
-            &__list{
-                top: 50%;
-            }
-        }
-    }
+  }
 }
