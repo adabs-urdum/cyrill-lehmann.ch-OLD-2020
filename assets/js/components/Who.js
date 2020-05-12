@@ -85,6 +85,16 @@ class Who extends Component {
           </li>
           <li className="home__contactEntry">
             <a
+              href="https://www.linkedin.com/in/adabs-urdum"
+              target="__blank"
+              rel="noopener"
+              className="home__contactAnchor"
+            >
+              linkedin
+            </a>
+          </li>
+          <li className="home__contactEntry">
+            <a
               href="https://www.patreon.com/user/creators?u=5977648"
               target="__blank"
               rel="noopener"

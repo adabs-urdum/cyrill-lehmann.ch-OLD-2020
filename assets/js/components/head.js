@@ -297,22 +297,6 @@ class Head extends Component {
     const assetsManager = new BABYLON.AssetsManager(this.state.scene);
     assetsManager.useDefaultLoadingScreen = false;
 
-    const textureNormalTask = assetsManager.addTextureTask(
-      "face normal",
-      "../dist/obj/head3d.png"
-    );
-    textureNormalTask.onSuccess = function (task) {
-      _this.normalTexture = task.texture;
-    };
-
-    const texturePsychoTask = assetsManager.addTextureTask(
-      "face psycho",
-      "../dist/obj/head3d_psycho.png"
-    );
-    texturePsychoTask.onSuccess = function (task) {
-      _this.psychoTexture = task.texture;
-    };
-
     const meshTask = assetsManager.addMeshTask(
       "mesh task",
       "",
@@ -510,9 +494,25 @@ class Head extends Component {
       console.log("error");
     };
 
+    const textureNormalTask = assetsManager.addTextureTask(
+      "face normal",
+      "../dist/obj/head3d.png"
+    );
+    textureNormalTask.onSuccess = function (task) {
+      _this.normalTexture = task.texture;
+    };
+
+    const texturePsychoTask = assetsManager.addTextureTask(
+      "face psycho",
+      "../dist/obj/head3d_psycho.png"
+    );
+    texturePsychoTask.onSuccess = function (task) {
+      _this.psychoTexture = task.texture;
+    };
+
     assetsManager.onFinish = (tasks) => {
-      this.state.engine.runRenderLoop(() => {
-        this.state.scene.render();
+      _this.state.engine.runRenderLoop(() => {
+        _this.state.scene.render();
       });
     };
 

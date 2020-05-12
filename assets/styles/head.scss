@@ -27,7 +27,7 @@
     border-top: solid 2vmin $Mustard;
     border-left: solid 2vmin $Mustard;
     border-radius: 50%;
-    animation: ease-in-out ROTATE 2s infinite;
+    animation: linear ROTATE 2s infinite;
     transform-origin: left top;
 
     &:after,
@@ -41,10 +41,12 @@
       width: 200%;
       height: 200%;
       border-top: solid 2vmin $MustardDark;
-      border-left: solid 2vmin $MustardDark;
+      border-right: solid 2vmin $MustardDark;
       border-bottom: solid 2vmin $Mustard;
-      border-right: solid 2vmin $Mustard;
+      border-left: solid 2vmin $Mustard;
       border-radius: 50%;
+      transform-origin: left top;
+      animation: linear ROTATE 2s infinite;
     }
 
     &:before {
@@ -54,6 +56,7 @@
       border-right: solid 2vmin $MustardDark;
       border-top: solid 2vmin $Mustard;
       border-left: solid 2vmin $Mustard;
+      animation: linear ROTATE 3s infinite;
     }
   }
 
@@ -72,12 +75,12 @@
   }
 }
 
-.who + #head {
+.who+#head {
   left: 100%;
   transform: translateX(0) translateY(-50%);
 }
 
-.what + #head {
+.what+#head {
   left: -100%;
   transform: translateX(0) translateY(-50%);
 }
