@@ -42,7 +42,7 @@ class Who extends Component {
             fluent in german, english and mandarin
           </li>
           <li className="who__listEntry">
-            no religion, racism, fascism and ignorance which leads to one of
+            no religion, racism, fascism or any ignorance which leads to one of
             those
           </li>
           <li className="who__listEntry">elsewise feel free to reach out</li>
