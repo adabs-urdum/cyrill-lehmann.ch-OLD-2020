@@ -8,6 +8,7 @@ class Head extends Component {
     super(props);
 
     this.state = {
+      currentRoot: window.location.pathname.substr(1),
       engine: null,
       scene: null,
       camera: null,
@@ -521,10 +522,13 @@ class Head extends Component {
   };
 
   render() {
+    const showLoader =
+      this.state.currentRoot.length === 0 && !this.state.headLoaded;
+
     return (
       <Fragment>
         <canvas id="head" width="1500" height="1500"></canvas>
-        {this.state.headLoaded ? null : <div className="head__loader"></div>}
+        {showLoader ? <div className="head__loader"></div> : null}
       </Fragment>
     );
   }

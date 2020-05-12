@@ -15,7 +15,9 @@ class What extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      ready: false,
+    };
   }
 
   componentDidMount() {
@@ -42,6 +44,7 @@ class What extends Component {
 
       this.setState({
         projects: projects,
+        ready: true,
       });
     });
   }
@@ -90,7 +93,9 @@ class What extends Component {
         <Link to="/" className="button what__anchorBack">
           back
         </Link>
-        <ul className="what__list">{projectsJsx}</ul>
+        <ul className={this.state.ready ? "what__list ready" : "what__list"}>
+          {projectsJsx}
+        </ul>
       </section>
     );
   }
