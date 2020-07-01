@@ -48,10 +48,10 @@ class Who extends Component {
             wordpress, processwire, codeigniter, three and other stuff
           </li>
           <li className="who__listEntry">
-            interested in skis, salad, cheese, detective conan and even more
+            interested in skis, salad, cheese, aquaponics and even more
           </li>
           <li className="who__listEntry">
-            fluent in german, english and mandarin
+            fluent in (swiss-)german, english and mandarin
           </li>
           {/* <li className="who__listEntry">
             no religion, racism, fascism or any ignorance which leads to one of
