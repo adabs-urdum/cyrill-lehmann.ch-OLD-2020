@@ -22,7 +22,11 @@ class Home extends Component {
           <h1 className="home__name">Cyrill Lehmann</h1>
           <h2 className="home__position">Web Developer</h2>
         </div>
-        <Link to="/who" className="button home__anchorWho">
+        <Link
+          to="/who"
+          className="button home__anchorWho"
+          onClick={(e) => this.props.gace(e, "who")}
+        >
           who
         </Link>
         <a
@@ -30,10 +34,15 @@ class Home extends Component {
           rel="noopener"
           href="https://cyrill-lehmann.ch/tutorials"
           className="button home__anchorTutorials"
+          onClick={(e) => this.props.gace(e, "tutorials")}
         >
           tutorials
         </a>
-        <Link to="/what" className="button home__anchorWhat">
+        <Link
+          to="/what"
+          className="button home__anchorWhat"
+          onClick={(e) => this.props.gace(e, "what")}
+        >
           what
         </Link>
       </section>

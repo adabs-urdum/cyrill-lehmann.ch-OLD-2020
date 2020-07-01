@@ -18,16 +18,28 @@ class Who extends Component {
   render() {
     return (
       <section className="who">
-        <Link to="/" className="button who__anchorBack">
+        <Link
+          to="/"
+          className="button who__anchorBack"
+          onClick={(e) => this.props.gace(e, "home")}
+        >
           back
         </Link>
         <ul className="who__list">
           <li className="who__listEntry">based in chur, switzerland</li>
           <li className="who__listEntry">
-            spending my days at{" "}
-            <a href="https://clus.ch" rel="noopener" target="__blank">
+            spending most of my days at{" "}
+            <a
+              href="https://clus.ch"
+              rel="noopener"
+              target="__blank"
+              onClick={(e) => this.props.gace(e, "clus.ch")}
+            >
               clus.ch
             </a>
+          </li>
+          <li className="who__listEntry">
+            doing my own thing under Lehmann Webentwicklung
           </li>
           <li className="who__listEntry">
             been having fun with django, laravel, css, react, babylon,
@@ -41,11 +53,11 @@ class Who extends Component {
           <li className="who__listEntry">
             fluent in german, english and mandarin
           </li>
-          <li className="who__listEntry">
+          {/* <li className="who__listEntry">
             no religion, racism, fascism or any ignorance which leads to one of
             those
-          </li>
-          <li className="who__listEntry">elsewise feel free to reach out</li>
+          </li> */}
+          <li className="who__listEntry">feel free to reach out</li>
         </ul>
         <ul className="home__contactList">
           <li className="home__contactEntry">
@@ -54,6 +66,7 @@ class Who extends Component {
               target="__blank"
               rel="noopener"
               className="home__contactAnchor"
+              onClick={(e) => this.props.gace(e, "github")}
             >
               github
             </a>
@@ -64,12 +77,17 @@ class Who extends Component {
               target="__blank"
               rel="noopener"
               className="home__contactAnchor"
+              onClick={(e) => this.props.gace(e, "codepen")}
             >
               codepen
             </a>
           </li>
           <li className="home__contactEntry">
-            <a href="mailto:cyrill@adabs.ch" className="home__contactAnchor">
+            <a
+              href="mailto:cyrill@adabs.ch"
+              className="home__contactAnchor"
+              onClick={(e) => this.props.gace(e, "mail")}
+            >
               email
             </a>
           </li>
@@ -79,6 +97,7 @@ class Who extends Component {
               target="__blank"
               rel="noopener"
               className="home__contactAnchor"
+              onClick={(e) => this.props.gace(e, "instagram")}
             >
               instagram
             </a>
@@ -89,6 +108,7 @@ class Who extends Component {
               target="__blank"
               rel="noopener"
               className="home__contactAnchor"
+              onClick={(e) => this.props.gace(e, "linkedin")}
             >
               linkedin
             </a>
@@ -99,6 +119,7 @@ class Who extends Component {
               target="__blank"
               rel="noopener"
               className="home__contactAnchor"
+              onClick={(e) => this.props.gace(e, "patreon")}
             >
               patreon
             </a>
@@ -109,6 +130,7 @@ class Who extends Component {
               target="__blank"
               rel="noopener"
               className="home__contactAnchor"
+              onClick={(e) => this.props.gace(e, "udemy")}
             >
               udemy
             </a>
@@ -119,6 +141,7 @@ class Who extends Component {
               target="__blank"
               rel="noopener"
               className="home__contactAnchor"
+              onClick={(e) => this.props.gace(e, "cssbattle")}
             >
               cssbattle
             </a>

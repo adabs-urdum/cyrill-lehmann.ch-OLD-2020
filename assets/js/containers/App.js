@@ -81,6 +81,11 @@ class App extends Component {
     );
   };
 
+  gace = (e, target) => {
+    // ga('send', 'event', 'Kategorie', 'Aktion', 'Label', value);
+    ga("send", "event", "link", "click", target, target);
+  };
+
   render() {
     const internetExplorerWarning = (
       <h3 className="internetExplorerWarning">
@@ -95,7 +100,9 @@ class App extends Component {
           <Switch>
             <Route
               path="/who"
-              render={() => <Who setCurrentRoot={this.setCurrentRoot} />}
+              render={() => (
+                <Who setCurrentRoot={this.setCurrentRoot} gace={this.gace} />
+              )}
             />
             <Route
               path="/what"
@@ -104,12 +111,15 @@ class App extends Component {
                   setCurrentRoot={this.setCurrentRoot}
                   projects={this.state.projects}
                   ready={this.state.projectsReady}
+                  gace={this.gace}
                 />
               )}
             />
             <Route
               path="/"
-              render={() => <Home setCurrentRoot={this.setCurrentRoot} />}
+              render={() => (
+                <Home setCurrentRoot={this.setCurrentRoot} gace={this.gace} />
+              )}
             />
           </Switch>
         </BrowserRouter>

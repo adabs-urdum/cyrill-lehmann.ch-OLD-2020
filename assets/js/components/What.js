@@ -53,6 +53,7 @@ class What extends Component {
                 target="__blank"
                 rel="noopener"
                 href={project.link}
+                onClick={(e) => this.props.gace(e, project.name)}
               >
                 <img
                   className="what__projectImage"
@@ -75,7 +76,11 @@ class What extends Component {
 
     return (
       <section className="what">
-        <Link to="/" className="button what__anchorBack">
+        <Link
+          to="/"
+          className="button what__anchorBack"
+          onClick={(e) => this.props.gace(e, "home")}
+        >
           back
         </Link>
         <ul className={this.state.ready ? "what__list ready" : "what__list"}>
