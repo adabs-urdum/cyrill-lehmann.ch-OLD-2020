@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { Component, Fragment } from "react";
 import {
   BrowserRouter,
@@ -24,7 +25,36 @@ class App extends Component {
       body: document.getElementById("body"),
       html: document.getElementById("html"),
       isIeEdge: document.documentMode || /Edge\//.test(navigator.userAgent),
+      projects: null,
+      projectsReady: false,
     };
+  }
+
+  componentDidMount() {
+    const fetchUrl =
+      window.location.hostname == "localhost"
+        ? "https://api.adabs.ch.test"
+        : "https://api.adabs.ch";
+
+    axios.get(fetchUrl + "/projects/").then((response) => {
+      const projectsData = response.data.projects;
+      const projects = [];
+      projectsData.forEach((project) => {
+        projects.push({
+          name: project.title,
+          tags: project.tags,
+          description: project.description,
+          link: project.linkout,
+          imageSrc: project.image.url,
+          imageSrcset: project.image.srcset,
+        });
+      });
+
+      this.setState({
+        projects: projects,
+        projectsReady: true,
+      });
+    });
   }
 
   setCurrentRoot = (rootName) => {
@@ -69,7 +99,13 @@ class App extends Component {
             />
             <Route
               path="/what"
-              render={() => <What setCurrentRoot={this.setCurrentRoot} />}
+              render={() => (
+                <What
+                  setCurrentRoot={this.setCurrentRoot}
+                  projects={this.state.projects}
+                  ready={this.state.projectsReady}
+                />
+              )}
             />
             <Route
               path="/"

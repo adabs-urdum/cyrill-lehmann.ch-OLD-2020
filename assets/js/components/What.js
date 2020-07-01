@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { Component } from "react";
 import {
   BrowserRouter,
@@ -17,41 +16,27 @@ class What extends Component {
 
     this.state = {
       ready: false,
+      projects: props.projects,
     };
   }
 
   componentDidMount() {
     this.props.setCurrentRoot(this.props.location.pathname);
+  }
 
-    const fetchUrl =
-      window.location.hostname == "localhost"
-        ? "https://api.adabs.ch.test"
-        : "https://api.adabs.ch";
-
-    axios.get(fetchUrl + "/projects/").then((response) => {
-      const projectsData = response.data.projects;
-      const projects = [];
-      projectsData.forEach((project) => {
-        projects.push({
-          name: project.title,
-          tags: project.tags,
-          description: project.description,
-          link: project.linkout,
-          imageSrc: project.image.url,
-          imageSrcset: project.image.srcset,
+  componentDidUpdate() {
+    if (this.props.projects && !this.state.ready) {
+      window.setTimeout(() => {
+        this.setState({
+          ready: true,
         });
-      });
-
-      this.setState({
-        projects: projects,
-        ready: true,
-      });
-    });
+      }, 200);
+    }
   }
 
   render() {
-    const projectsJsx = this.state.projects
-      ? this.state.projects.map((project) => {
+    const projectsJsx = this.props.projects
+      ? this.props.projects.map((project) => {
           const tagsJsx = project.tags.map((tag) => {
             return (
               <li className="what__tagListEntry" key={tag.replace(" ", "")}>
