@@ -46,7 +46,11 @@ class What extends Component {
     const tagsJSX = this.props.tags
       ? this.props.tags.map((tag) => {
           return (
-            <label className="what__tagListLabel" key={tag}>
+            <label
+              className="what__tagListLabel"
+              key={tag}
+              onClick={(e) => this.props.gace(e, `filter ${tag}`)}
+            >
               <input
                 className="what__tagListInput"
                 type="radio"
@@ -62,7 +66,11 @@ class What extends Component {
 
     if (tagsJSX) {
       tagsJSX.unshift(
-        <label className="what__tagListLabel" key="all">
+        <label
+          className="what__tagListLabel"
+          key="all"
+          onClick={(e) => this.props.gace(e, "filter all")}
+        >
           <input
             className="what__tagListInput"
             type="radio"
