@@ -50,8 +50,28 @@ class App extends Component {
         });
       });
 
+      const tags = projects.length
+        ? [
+            ...new Set(
+              projects
+                .map((project) => {
+                  return project.tags;
+                })
+                .flat()
+            ),
+          ].sort((a, b) => {
+            if (a > b) {
+              return 1;
+            } else if (b > a) {
+              return -1;
+            }
+            return 0;
+          })
+        : null;
+
       this.setState({
         projects: projects,
+        projectTags: tags,
         projectsReady: true,
       });
     });
@@ -110,6 +130,7 @@ class App extends Component {
                 <What
                   setCurrentRoot={this.setCurrentRoot}
                   projects={this.state.projects}
+                  tags={this.state.projectTags}
                   ready={this.state.projectsReady}
                   gace={this.gace}
                 />

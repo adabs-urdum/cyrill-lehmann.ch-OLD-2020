@@ -37,6 +37,28 @@
     }
   }
 
+  &__tagListInput {
+    display: none;
+
+    &:checked,
+    &:hover {
+      &+.what {
+        &__tagListFilter {
+          color: $Mustard;
+          background: rgba(51, 51, 51, 1);
+        }
+      }
+    }
+  }
+
+  &__tagListFilter {
+    opacity: 0.5;
+    color: $MustardDark;
+    background: rgba(51, 51, 51, 0.8);
+    cursor: pointer;
+    display: block;
+  }
+
   &__listEntry {
     display: inline-block;
     position: relative;
@@ -50,12 +72,27 @@
       margin-bottom: $BS * 256;
     }
 
-    &:nth-child(odd) {
+    &:nth-child(even) {
       transform: translateX(-10%);
     }
 
-    &:nth-child(even) {
+    &:nth-child(odd) {
       transform: translateX(10%);
+    }
+
+    &--filter {
+      display: flex;
+      flex-wrap: wrap;
+      top: 0;
+      left: 50%;
+      z-index: 10;
+      width: 100%;
+      text-align: left;
+      margin-bottom: $BS * 112;
+
+      &:first-child {
+        transform: translateX(-50%);
+      }
     }
   }
 
