@@ -113,11 +113,8 @@ class Head extends Component {
 
   bindEvents = () => {
     if (!this.state.hasGyroscope) {
-      // this.buttonGyroscope.style.display = 'none';
       window.addEventListener("mousemove", this.getMousePosition);
     } else {
-      // this.buttonGyroscope.style.display = 'inline-block';
-      // window.addEventListener("click", this.getMousePosition);
       window.addEventListener("click", this.getGyroscope);
     }
 
@@ -133,7 +130,6 @@ class Head extends Component {
       window.addEventListener(
         "devicemotion",
         (e) => {
-          // console.log(e.acceleration.x, e.acceleration.y);
           this.getDevicePosition(e.acceleration.x * 2, e.acceleration.y * 2);
         },
         true
