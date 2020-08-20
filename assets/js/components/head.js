@@ -43,6 +43,7 @@ class Head extends Component {
       new BABYLON.Vector3(0, 200, 0),
       scene
     );
+    hemisphericLight.groundColor = new BABYLON.Color3(1, 1, 1);
     hemisphericLight.diffuse = new BABYLON.Color3(1, 1, 1);
 
     const lightIntensity = 1;
@@ -318,14 +319,14 @@ class Head extends Component {
 
       // both eyeballs
       task.loadedMeshes[1].material.diffuseColor = new BABYLON.Color3(
-        0.54,
-        0.5,
-        0.54
+        0.84,
+        0.8,
+        0.84
       );
       task.loadedMeshes[1].material.specularColor = new BABYLON.Color3(
-        0.1,
-        0.1,
-        0.1
+        0.4,
+        0.4,
+        0.4
       );
 
       // both ???
